@@ -1,0 +1,34 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { profile } from '../data/profile';
+---
+
+<BaseLayout description={profile.summary}>
+  <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">{profile.name}</h1>
+  <p class="mt-2 text-xl text-slate-600 dark:text-slate-300">{profile.headline}</p>
+
+  <p class="mt-8 text-lg leading-relaxed">{profile.summary}</p>
+
+  <section class="mt-12" aria-labelledby="role">
+    <h2 id="role" class="text-2xl font-semibold">Current role</h2>
+    <p class="mt-3 leading-relaxed">{profile.currentRole}</p>
+  </section>
+
+  <section class="mt-12" aria-labelledby="focus">
+    <h2 id="focus" class="text-2xl font-semibold">Focus areas</h2>
+    <ul class="mt-3 list-disc space-y-1 pl-6">
+      {profile.focusAreas.map((area) => <li>{area}</li>)}
+    </ul>
+  </section>
+
+  <section class="mt-12" aria-labelledby="links">
+    <h2 id="links" class="text-2xl font-semibold">Get in touch</h2>
+    <ul class="mt-3 flex flex-wrap gap-x-6 gap-y-2">
+      {
+        profile.links.map((l) => (
+          <li><a class="font-medium text-blue-700 underline dark:text-blue-300" href={l.href}>{l.label}</a></li>
+        ))
+      }
+    </ul>
+  </section>
+</BaseLayout>
