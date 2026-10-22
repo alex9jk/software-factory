@@ -66,6 +66,14 @@ public/         # static assets, resume PDF, favicon, _headers, _redirects
 - Write in first person, plain and direct; no buzzword padding.
 - Project write-ups follow: problem → what I built → stack → what I learned.
 
+## Git workflow
+- `main` is production, `develop` is the integration branch. Never commit directly to either.
+- For every new feature or change request, first create a branch off `develop` named for that change
+  (e.g. `feature/update-profile`) and switch to it. Make sure `develop` is up to date first.
+- Do all work for that request on that branch. When it's time to commit and push, use that same branch
+  (`git push -u origin <branch>`); don't commit to another branch or start a second one for the same change.
+- Merge via pull request into `develop`; `develop` → `main` is a separate PR.
+
 ## Guardrails
 - Never commit secrets, API tokens, or `.env` files
 - Never force-push to `main` or rewrite shared history
