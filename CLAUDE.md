@@ -19,14 +19,14 @@ Purpose: a fast, simple portfolio site to support a job search targeting AI star
 ## Stack
 - Site: Astro, fully static output (no SSR, no Cloudflare adapter), Tailwind CSS
 - Content: Markdown/MDX via Astro content collections
-- Hosting: Cloudflare Pages, connected to the GitHub repo
-  - Build command: `npm run build` · Output directory: `dist`
-  - Push to `main` → production deploy; every PR/branch → preview URL
-- Domain: none yet; the site runs on its `*.pages.dev` URL. A custom domain will be
+- Hosting: Cloudflare Workers (static assets), connected to the GitHub repo
+  - Build command: `npm run build` · Assets directory: `dist` (set in `wrangler.jsonc`)
+  - Push to `main` → production deploy; every PR/branch → preview URL (needs the `previews` block in `wrangler.jsonc`)
+- Domain: none yet; the site runs on its `*.workers.dev` URL. A custom domain will be
   added later via Cloudflare. Don't hardcode a domain anywhere: read the site URL from
   the `site` setting in `astro.config.mjs` so canonical links, Open Graph URLs, and the
   sitemap update in one place.
-- Headers and redirects: `public/_headers` and `public/_redirects` (Cloudflare Pages format)
+- Headers and redirects: `public/_headers` and `public/_redirects` (Cloudflare format, served by static assets)
 
 ## Repo layout
 ```
@@ -47,8 +47,8 @@ public/         # static assets, resume PDF, favicon, _headers, _redirects
 - `npm run preview` — serve the built site locally
 - `npm run lint` / `npm run format` — ESLint + Prettier
 - `npm run check` — `astro check` for type and content-schema errors
-- Deploys happen automatically through Cloudflare Pages on push. Do not run
-  `wrangler pages deploy` or change Cloudflare settings unless asked.
+- Deploys happen automatically through Cloudflare on push. Do not run
+  `wrangler deploy` or change Cloudflare settings unless asked.
 
 ## Conventions
 - TypeScript in strict mode for any scripts/components
